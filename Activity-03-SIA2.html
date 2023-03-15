@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banac Form Validation</title>
+  <style type="text/css">
+
+.input-1{
+    border:1px solid #367E18;
+}
+.input-2{
+    border:1px solid red;
+}
+
+body,html{
+  padding: 0;
+  margin: 0;
+  font-family: fantasy;
+}
+.head{
+ background-color:  #febe10;
+ position: relative;
+ bottom: 20px;
+ padding: 10px;
+ border-bottom: 5px solid #003976;
+}
+h1{
+  font-size: 30px;
+  color: #003976;
+  text-align: center;
+}
+
+form{
+    width: 300px;
+    padding: 50px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 2% auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 5px;
+}
+label{
+    margin-bottom: 5px;
+    display: block;
+    letter-spacing: 2px;
+   
+}
+
+input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.box {
+    margin-bottom: 10px;
+}
+.error {
+    color: red;
+    font-family: sans-serif;
+}
+
+
+input[type="submit"] {
+    font-size: 15px;
+    width: 100px;
+    background-color: #febe10;
+    color: #003976;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 200px;
+}
+input[type="submit"]:hover {
+    background-color: #003976;
+    color: white;
+}
+footer {
+  background-color: #f5f5f5;
+  padding: 10px;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+ </style>
+  <div class="head">
+         <h1>Course Registration Form</h1>
+  </div>
+
+<form name="myForm"  onsubmit="return validate()" >
+
+    <div class="box">
+        <label>First name</label>
+        <input type="text" name="firstname" id="firstname">
+        <div class="error" id="firstnameErr"></div>
+    </div>
+
+     <div class="box">
+        <label>Last name</label>
+        <input type="text" name="lastname" id="lastname">
+        <div class="error" id="lastnameErr"></div>
+    </div>
+
+     <div class="box">
+        <label>Student ID</label>
+        <input type="text" name="studentid" id="studentid" maxlength="8" placeholder="Maximum of eight digits">
+        <div class="error" id="studentidErr"></div>
+    </div>
+
+    <div class="box">
+        <label>Social Security Number</label>
+        <input type="text" name="pin" maxlength="4" placeholder="Last four digits of your SSN" id="pin">
+        <div class="error" id="pinErr"></div>
+    </div>
+
+    <div class="box">
+        <label>Address</label>
+        <input type="text" name="address" id="address">
+        <div class="error" id="addressErr"></div>
+    </div>
+
+    <div class="box">
+        <label>City</label>
+        <input type="text" name="city" id="city">
+        <div class="error" id="cityErr"></div>
+    </div>
+
+    <div class="box">
+        <label>Zip Code</label>
+        <input type="text" name="zipcode" maxlength="4" placeholder="Maximum of four digits" id="zipcode">
+        <div class="error" id="zipcodeErr"></div>
+    </div>
+
+    <div class="box">
+        <label>Email Address</label>
+        <input type="text" name="email" id="email">
+        <div class="error" id="emailErr"></div>
+    </div>
+
+    <div class="box">
+        <label>Phone</label>
+        <input type="text" name="mobile" maxlength="11" placeholder="Maximum of eleven digit numbers" id="mobile">
+        <div class="error" id="mobileErr"></div>
+    </div>
+          
+    <div class="box">
+        <input type="submit" value="SUBMIT">
+    </div>
+
+   <footer>
+         <p>&copy; 2023 Activity 03 SIA. All rights reserved.</p>
+         <p><i>Randy M. Banac BSIT-3B</i></p>
+  </footer>
+</form>
+
+<script type="text/javascript">
+    function printError(Id, Msg) {
+    document.getElementById(Id).innerHTML = Msg;
+}
+
+
+function validate() {
+
+    var firstname = document.myForm.firstname.value;
+    var lastname = document.myForm.lastname.value;
+    var studentid = document.myForm.studentid.value;
+    var pin = document.myForm.pin.value;
+    var address = document.myForm.address.value;
+    var city = document.myForm.city.value;
+    var zipcode = document.myForm.zipcode.value;
+    var email = document.myForm.email.value;
+    var mobile = document.myForm.mobile.value;
+
+    var firstnameErr = lastnameErr = studentidErr = pinErr = addressErr = cityErr = zipcodeErr = emailErr = mobileErr =true;
+    
+    if(firstname == "") {
+        printError("firstnameErr", "Please enter your first name");
+         var myElement = document.getElementById("firstname");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        
+        var regex = /^[a-zA-Z\s]+$/;
+        if(regex.test(firstname) === false) {
+            printError("firstnameErr", "Please enter letters only");
+            var myElement = document.getElementById("firstname");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+        } else{
+            printError("firstnameErr", " ");
+            firstnameErr = false;
+             var myElement = document.getElementById("firstname");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+
+        }
+    }
+   
+   if(lastname == "") {
+        printError("lastnameErr", "Please enter your Last name");
+         var myElement = document.getElementById("lastname");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        
+        var regex = /^[a-zA-Z\s]+$/;
+        if(regex.test(lastname) === false) {
+            printError("lastnameErr", "Please enter letters only");
+            var myElement = document.getElementById("lastname");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+        } else{
+            printError("lastnameErr", " ");
+            lastnameErr = false;
+             var myElement = document.getElementById("lastname");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+
+        }
+    }
+
+    if(studentid == "") {
+        printError("studentidErr", "Please enter your Student ID");
+        var myElement = document.getElementById("studentid");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        var regex = /^[1-7]\d{7}$/;
+        if(regex.test(studentid) === false) {
+            printError("studentidErr", "Please enter a valid eight digit numbers");
+            var myElement = document.getElementById("studentid");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+            
+        } else{
+            printError("studentidErr", " ");
+            studentidErr = false;
+            var myElement = document.getElementById("studentid");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+        }
+    }
+
+    if(pin == "") {
+        printError("pinErr", "Please enter your four digits pin");
+        var myElement = document.getElementById("pin");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        var regex = /^[0-9]+$/;
+        if(regex.test(pin) === false) {
+            printError("pinErr", "Please enter a valid 4 digits pin");
+            var myElement = document.getElementById("pin");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+            
+        } else{
+            printError("pinErr", "");
+            pinErr = false;
+            var myElement = document.getElementById("pin");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+        }
+    }
+
+     if(address == "") {
+        printError("addressErr", "Please enter your Address");
+         var myElement = document.getElementById("address");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        
+        var regex = /^[a-zA-Z\s]+$/;
+        if(regex.test(address) === false) {
+            printError("addressErr", "Please enter letters only");
+            var myElement = document.getElementById("address");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+        } else{
+            printError("addressErr", " ");
+            addressErr = false;
+             var myElement = document.getElementById("address");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+
+        }
+    }
+
+     if(city == "") {
+        printError("cityErr", "Please enter your City");
+         var myElement = document.getElementById("city");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        
+        var regex = /^[a-zA-Z\s]+$/;
+        if(regex.test(city) === false) {
+            printError("cityErr", "Please enter letters only");
+            var myElement = document.getElementById("city");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+        } else{
+            printError("cityErr", " ");
+            city = false;
+             var myElement = document.getElementById("city");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+
+        }
+    }
+
+    if(zipcode == "") {
+        printError("zipcodeErr", "Enter your Zip Code");
+        var myElement = document.getElementById("zipcode");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        var regex = /^[0-9]+$/;
+        if(regex.test(zipcode) === false) {
+            printError("zipcodeErr", "Please enter a valid Zip Code");
+            var myElement = document.getElementById("zipcode");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+            
+        } else{
+            printError("zipcodeErr", "");
+            zipcode = false;
+            var myElement = document.getElementById("zipcode");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+        }
+    }
+   
+
+    if(email == "") {
+        printError("emailErr", "Please enter your email address");
+         var myElement = document.getElementById("email");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else { 
+        var regex = /^\S+@\S+\.\S+$/;
+        if(regex.test(email) === false) {
+            printError("emailErr", "Please enter a valid email address");
+            var myElement = document.getElementById("email");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+        } else{
+            printError("emailErr", "");
+            emailErr = false;
+             var myElement = document.getElementById("email");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+
+        }
+    }
+    
+ 
+   if(mobile == "") {
+        printError("mobileErr", "Please enter your phone number");
+        var myElement = document.getElementById("mobile");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+    } else {
+        var regex = /^[1-10]\d{10}$/;
+        if(regex.test(mobile) === false) {
+            printError("mobileErr", "Please enter a valid eleven digits number");
+            var myElement = document.getElementById("mobile");
+            myElement.classList.add("input-2");
+            myElement.classList.remove("input-1");
+            
+        } else{
+            printError("mobileErr", "");
+            mobileErr = false;
+            var myElement = document.getElementById("mobile");
+            myElement.classList.add("input-1");
+            myElement.classList.remove("input-2");
+        }
+    }
+    
+    
+   
+    if((firstnameErr || lastnameErr || studentidErr || pinErr || addressErr ||cityErr || zipcodeErr ||  emailErr ||mobileErr ) == true) { 
+      return false;
+    } 
+};
+
+</script>
+</body>
+</html>
